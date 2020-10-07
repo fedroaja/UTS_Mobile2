@@ -13,7 +13,7 @@ export class HomeService {
       id: 'p1',
       produkType: 'CPU',
       imgUrl: ['https://images-na.ssl-images-amazon.com/images/I/71h68eptZwL._AC_SX466_.jpg','https://images-na.ssl-images-amazon.com/images/I/71h68eptZwL._AC_SX466_.jpg'],
-      nama: 'Intel',
+      nama: 'Intelllll',
       model: 'i7',
       harga: 1500000,
       stok: 100,
