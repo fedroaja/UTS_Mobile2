@@ -12,9 +12,15 @@ export class HomeService {
     {
       id: 'p1',
       produkType: 'CPU',
+<<<<<<< HEAD
       imgUrl: ['https://images-na.ssl-images-amazon.com/images/I/71h68eptZwL._AC_SX466_.jpg','https://i.pcmag.com/imagery/articles/05H4n2dV0nMnFiEUnPG4Sgl-6.fit_scale.size_1050x591.v1569492159.jpg'],
       nama: 'Intel',
       model: 'Intel Core-i7',
+=======
+      imgUrl: ['https://images-na.ssl-images-amazon.com/images/I/71h68eptZwL._AC_SX466_.jpg','https://images-na.ssl-images-amazon.com/images/I/71h68eptZwL._AC_SX466_.jpg'],
+      nama: 'Intelllll',
+      model: 'i7',
+>>>>>>> 291dd4afb7cdd2257c76f93f11d1c23b446ae495
       harga: 1500000,
       stok: 100,
       baseClock: 3,
