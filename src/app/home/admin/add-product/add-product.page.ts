@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HomeService} from '../../home.service';
 import {Router} from '@angular/router';
-import {AlertController, ToastController} from '@ionic/angular';
+import {AlertController, ToastController, LoadingController} from '@ionic/angular';
 
 @Component({
   selector: 'app-add-product',
@@ -18,6 +18,7 @@ export class AddProductPage implements OnInit {
     private router: Router,
     private toastController: ToastController,
     private alertController: AlertController,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -80,9 +81,13 @@ export class AddProductPage implements OnInit {
   }
  
   addProduct(){
-    this.productService.addProduct(this.newProduct);
-    this.router.navigate(['home/admin']);
-    this.addToast();
+    this.presentLoading().then(() => {
+      this.productService.addProduct(this.newProduct);
+      this.router.navigate(['home/admin']);
+      this.addToast();
+    });
+
+   
   }
 
   async confirmAdd() {
@@ -113,6 +118,17 @@ export class AddProductPage implements OnInit {
       color: 'success'
     });
     toast.present();
+  }
+
+  async presentLoading(){
+    const loading = await this.loadingController.create({
+      message: 'Creating Product . . .',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
   }
 
 }

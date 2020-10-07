@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HomeService} from '../home.service';
 import {Product} from '../home.model';
-import { IonItemSliding,AlertController,ToastController } from '@ionic/angular';
+import { IonItemSliding,AlertController,ToastController, LoadingController } from '@ionic/angular';
 import {Router} from '@angular/router';
 
 @Component({
@@ -17,6 +17,7 @@ export class AdminPage implements OnInit {
     private router: Router,
       private toastController: ToastController,
       private alertController: AlertController,
+      public loadingController: LoadingController
   ) {}
 
   ngOnInit(){
@@ -34,11 +35,14 @@ export class AdminPage implements OnInit {
 
   
   delete(productId, slidingItems){
-    this.productService.deleteProduk(productId);
-    slidingItems.close();
-    this.router.navigate(['home/admin']);
-    this.deleteToast();
-    this.ionViewWillEnter();
+
+    this.presentLoading().then(() => {
+      this.productService.deleteProduk(productId);
+      slidingItems.close();
+      this.router.navigate(['home/admin']);
+      this.deleteToast();
+      this.ionViewWillEnter();
+    });
   }
 
 
@@ -70,5 +74,16 @@ export class AdminPage implements OnInit {
       color: 'success'
     });
     toast.present();
+  }
+
+  async presentLoading(){
+    const loading = await this.loadingController.create({
+      message: 'Deleting Product . . .',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
   }
 }

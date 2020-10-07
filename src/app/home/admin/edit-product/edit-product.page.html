@@ -18,7 +18,7 @@
     <ion-input type="text" [(ngModel)]="productEdit['editedImg2']"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Nama Barang</ion-label>
+    <ion-label position="floating">Merek</ion-label>
     <ion-input type="text" [(ngModel)]="productEdit['editedNama']"></ion-input>
   </ion-item>
   <ion-item>
@@ -56,7 +56,7 @@
 
   <ion-item *ngIf="loadedEditedProduct.produkType === 'RAM'">
     <ion-label position="floating">Speed</ion-label>
-    <ion-input type="number" [(ngModel)]="productEdit['editedSpeed']"></ion-input><h3 slot="end">Ghz</h3>
+    <ion-input type="number" [(ngModel)]="productEdit['editedSpeed']"></ion-input><h3 slot="end">Mhz</h3>
   </ion-item>
 
   <ion-item *ngIf="loadedEditedProduct.produkType === 'RAM'">

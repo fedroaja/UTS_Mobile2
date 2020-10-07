@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HomeService} from '../../home.service';
 import {Product} from '../../home.model';
-
-import {AlertController, ToastController} from '@ionic/angular';
+import {AlertController, ToastController, LoadingController} from '@ionic/angular';
 
 
 @Component({
@@ -38,6 +37,7 @@ export class EditProductPage implements OnInit {
       private router: Router,
       private toastController: ToastController,
       private alertController: AlertController,
+      public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -65,9 +65,12 @@ export class EditProductPage implements OnInit {
   }
 
   editProduct(){
-    this.productService.editProduk(this.loadedEditedProduct.id, this.productEdit)
-    this.router.navigate(['home/admin']);
-    this.editToast();
+    this.presentLoading().then(() => {
+      this.productService.editProduk(this.loadedEditedProduct.id, this.productEdit)
+      this.router.navigate(['home/admin']);
+      this.editToast();
+    });
+    
   }
 
 
@@ -99,6 +102,17 @@ export class EditProductPage implements OnInit {
       color: 'success'
     });
     toast.present();
+  }
+
+  async presentLoading(){
+    const loading = await this.loadingController.create({
+      message: 'Updating Product . . .',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
   }
 
 
