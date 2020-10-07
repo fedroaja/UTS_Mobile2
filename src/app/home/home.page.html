@@ -49,7 +49,7 @@
                 <ion-img [src]="product.imgUrl[0]"></ion-img>
               </ion-thumbnail >
                 <ion-label>
-                  <b>{{product.nama}}</b><br>
+                  <b>{{product.nama}} {{product.model}}</b><br>
                   {{product.harga | currency: 'Rp.':true:'2.0'}}<br>
                   Tersedia: {{product.stok}}
               </ion-label>
