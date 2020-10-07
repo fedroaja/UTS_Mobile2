@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="sideMenu"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" (click)="toggleBtn()">
+      <ion-button>
+        <ion-icon name="grid" slot="end" [name]="visible ? 'grid' : 'list'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="visible">
+
+  <ion-card *ngFor="let product of products" [routerLink]="['./',product.id]">
+    <ion-card-content>
+     <ion-list>
+       <ion-item lines="none">
+        <ion-thumbnail  slot="start">
+          <ion-img [src]="product.imgUrl[0]"></ion-img>
+        </ion-thumbnail >
+          <ion-label>
+            <b>{{product.nama}}</b><br>
+            {{product.harga | currency: 'Rp.':true:'2.0'}}<br>
+            Tersedia: {{product.stok}}
+        </ion-label>
+       </ion-item>
+     </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-content *ngIf="!visible">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card [routerLink]="['./',product.id]" >
+          <ion-card-content>
+           <ion-list>
+              <ion-thumbnail class="imgGrid" slot="start">
+                <ion-img [src]="product.imgUrl[0]"></ion-img>
+              </ion-thumbnail >
+                <ion-label>
+                  <b>{{product.nama}}</b><br>
+                  {{product.harga | currency: 'Rp.':true:'2.0'}}<br>
+                  Tersedia: {{product.stok}}
+              </ion-label>
+           </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+ 
+
+</ion-content>
